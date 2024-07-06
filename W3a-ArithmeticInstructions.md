@@ -2,6 +2,7 @@
 
 ## My Code:
 ### result = -var1 * 10
+
 ```
 section .data
     var1    dd  20       
@@ -32,6 +33,7 @@ section .bss
 ```
 
 ### result = var1 + var2 + var3 + var4
+
 ```
 section .data
     var1    dd  10     
@@ -63,6 +65,80 @@ _start:
 section .bss
 ```
 
+### result = (-var1 * var2) +var3
+
+```
+section .data
+    var1_addr   dd  0x11223344    ; example memory addresses
+    var2_addr   dd  0x55667788    
+    var3_addr   dd  0x99AABBCC    
+    result_addr dd  0x0            ; memory address to store result (initialized to 0)
+
+section .text
+    global _start
+
+_start:
+    ; load var1 into register eax
+    mov eax, dword [var1_addr]
+
+    ; load var2 into register ebx
+    mov ebx, dword [var2_addr]
+
+    ; load var3 into register ecx
+    mov ecx, dword [var3_addr]
+
+    ; perform (-var1 * var2) + var3
+    neg eax         ; negate var1 (eax = -var1)
+    imul eax, ebx   ; multiply var2 with -var1 (eax = -var1 * var2)
+    add eax, ecx    ; add var3 to the result (eax = (-var1 * var2) + var3)
+
+    ; store the result back to memory
+    mov dword [result_addr], eax
+
+    ; exit program
+    mov eax, 1      ; system call for exit
+    xor ebx, ebx    ; return 0 status
+    int 0x80        ; make syscall
+```
+
+### result = (var1 * 2)/(var2-3)
+
+```
+section .data
+    var1_addr   dd  8      
+    var2_addr   dd  5       
+    result_addr dd  0       ; initialize result to 0
+
+section .text
+    global _start
+
+_start:
+    ; load var1 into register eax
+    mov eax, dword [var1_addr]
+
+    ; load var2 into register ebx
+    mov ebx, dword [var2_addr]
+
+    ; double var1 (eax = var1 * 2)
+    shl eax, 1       
+
+    ; (ebx = var2 - 3)
+    sub ebx, 3       ; ebx = ebx - 3
+
+    ; divide var1 * 2 by (var2 - 3)
+    cdq              
+    idiv ebx       
+
+    ; store the result back to memory
+    mov dword [result_addr], eax
+
+    ; exit program
+    mov eax, 1       ; system call for exit
+    xor ebx, ebx     ; return 0 status
+    int 0x80         ; make syscall
+
+```
+result = 
 ## Flowchart:
 [click here] (insert link)
 
