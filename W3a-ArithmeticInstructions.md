@@ -138,9 +138,10 @@ _start:
     int 0x80         ; make syscall
 
 ```
-result = 
+
 ## Flowchart:
-[click here] (insert link)
+[click here] (https://drive.google.com/file/d/1wuI3gCXvi5aW4xVITkQJ21n22gPY6oU1/view?usp=sharing)
 
 ## Challenges:
+The most challenging part about this assignment was learning how to apply the instructions to suit each equation. The first equation, for example, took me a little longer to figure out how to make a variable negative. So manipulating them was difficult for me in the beginning. But it slowly got easier over time.
 
