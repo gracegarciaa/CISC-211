@@ -31,33 +31,31 @@ _start:
 section .bss
 ```
 
+### result = var1 + var2 + var3 + var4
 ```
 section .data
-    var1    dd  10       ; Initialized variable var1 (adjust values as needed)
-    var2    dd  20       ; Initialized variable var2
-    var3    dd  30       ; Initialized variable var3
-    var4    dd  40       ; Initialized variable var4
+    var1    dd  10     
+    var2    dd  20    
+    var3    dd  30     
+    var4    dd  40  
 
 section .text
     global _start
 
 _start:
-    ; Load var1, var2, var3, var4 into registers
-    mov eax, [var1]    ; Load var1 into eax
-    mov ebx, [var2]    ; Load var2 into ebx
-    mov ecx, [var3]    ; Load var3 into ecx
-    mov edx, [var4]    ; Load var4 into edx
+    ; load var1, var2, var3, var4 into registers
+    mov eax, [var1]   
+    mov ebx, [var2]  
+    mov ecx, [var3]   
+    mov edx, [var4]   
 
-    ; Add var1, var2, var3, and var4 together
+    ; add var1,2,3,4 together
     add eax, ebx       ; eax += ebx (eax = var1 + var2)
     add eax, ecx       ; eax += ecx (eax = var1 + var2 + var3)
     add eax, edx       ; eax += edx (eax = var1 + var2 + var3 + var4)
 
-    ; Now eax contains the result
 
-    ; You can use eax directly or store it somewhere else if needed
-
-    ; Exit the program
+    ; exit the program
     mov ebx, 0         ; exit status
     mov eax, 1         ; syscall number for exit
     int 0x80           ; make syscall
