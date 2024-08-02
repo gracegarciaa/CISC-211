@@ -1,6 +1,59 @@
 # Loops & Arrays
 
 ## My Code:
+
+Part 1:
+```
+section .text
+        global _start
+
+_start:
+        mov ebx,0       ; reset ebx = 0
+label:
+        inc ebx
+        cmp ebx,10
+        jl label        ;jump if less
+
+        mov eax,1       
+        xor ebx, ebx    
+        int 0x80
+
+; findings --> the code initializes the ebx register to 0 then increments it in a loop until it reaches 10. After the loop finishes, it exits the with code 0.
+```
+
+Part 2:
+```
+section .bss
+sum resd 1        ; reserve space for sum
+
+section .text
+    global _start
+
+_start:
+    ; initialize vars
+    mov eax, 0    ; Fibonacci(0)
+    mov ebx, 1    ; Fibonacci(1)
+    mov ecx, 10   ; ctr for first 10 fib nums
+    mov edi, 0    ; hold sum of fib nums
+    
+    ; initialize sum
+    mov [sum], edi
+    
+    ; calculate fib nums & sum
+loop_fib:
+    add edi, eax  ; add current fib to sum
+    mov [sum], edi
+    add eax, ebx  ; generate next num
+    xchg eax, ebx ; swap eax & ebx to update sequence
+    loop loop_fib ; loop until all 10 nums have been processed
+
+   
+    mov eax, 1    
+    xor ebx, ebx  
+    int 0x80      
+```
+
+Part 3:
 ```
 section .data
     array:  dd 4, 8, 2, 10  ; define arr of ints 
