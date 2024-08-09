@@ -3,34 +3,28 @@
 ## My Code:
 ```
 section .data
-    number  dd 5       ; Pre-defined number for which we want to calculate factorial
-    result  dd 0       ; Variable to store the result of the factorial
+    number dq 5              ; num to compute fact of
+    result dq 1              ; result var
 
 section .text
     global _start
 
 _start:
-    mov eax, [number]  ; load num into EAX
-    
-    ; initialize result = 1
-    mov ebx, 1         ; EBX holds result
-    mov ecx, eax       ; ECX = loop ctr
-    
+    ; load numb into rax reg
+    mov rax, [number]        ; rax = num
+    mov rbx, rax            ; loop ctr
+    mov rcx, 1              ; initial result)
+
 factorial_loop:
-    imul ebx           ; EAX = EAX * EBX
-    ; ctr-1
-    dec ecx            ; ECX - 1
-    ; Check if ECX is zero
-    jz done            ; if ECX = 0, go to done
-    ; else, continue loop
-    jmp factorial_loop ; repeat loop
+    imul rcx, rbx           ; rcx = rcx * rbx
+    dec rbx                 ; decrement rbx
+    jnz factorial_loop      ; if rbx != 0 --> continue loop
 
-done:
-    mov [result], ebx  ; store result in corresponding var
-    
+    ; store result in mem
+    mov [result], rcx
+
     ; exit prog
-    mov eax, 1        
-    xor ebx, ebx      
-    int 0x80           
+    mov rax, 60            
+    xor rdi, rdi           
+    syscall
 ```
-
