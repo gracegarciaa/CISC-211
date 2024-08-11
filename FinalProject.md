@@ -1,6 +1,6 @@
 # Final Project
 
-## Part 1:
+## Iterative:
 ```
 // counter.c
 #include <stdio.h>
@@ -47,7 +47,7 @@ gcc -o counter counter.c
 time ./counter 20000 >> counter_fun.txt 2>&1
 ```
 
-## Part 2:
+## Recursive:
 ```
 // counter_rec.c
 #include <stdio.h>
